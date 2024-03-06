@@ -1,0 +1,20 @@
+const joi = require('joi')
+
+exports.validateAddUser = (user) => {
+  const schema = joi.object({
+    username: joi.string().min(3).required(),
+    email: joi.string().email().required(),
+    password: joi.string().min(8).required(),
+  })
+
+  return schema.validate(user)
+}
+
+exports.validateEditUser = (user) => {
+  const schema = joi.object({
+    username: joi.string().min(3).required(),
+    email: joi.string().email().required(),
+  })
+
+  return schema.validate(user)
+}
