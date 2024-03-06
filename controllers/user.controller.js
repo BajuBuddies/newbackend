@@ -1,6 +1,6 @@
 const userService = require('../services/user.service')
-// const { imageValidations } = require('../validations/image.validation')
-// const {validateAddUser, validateEditUser} = require('../validations/user.validation')
+const { imageValidations } = require('../validations/image.validation')
+const {validateAddUser, validateEditUser} = require('../validations/user.validation')
 
 exports.getAllUsers = async (req, res) => {
 
@@ -12,6 +12,31 @@ exports.getAllUsers = async (req, res) => {
 exports.getDetailUser = async (req, res) => {
     
     const result = await userService.getDetailUser(req, res)
+
+    return res.status(result.status).json(result)
+}
+
+
+exports.createUser = async (req, res) => {
+
+    // Add imagevalidations and validateAddUser
+    let { error } = validateAddUser(req.body)
+
+    if (error) {
+        return res.status(400).json({
+            message: error.details[0].message
+        })
+    }
+
+    let imageVal = imageValidations(req)
+
+    if (imageVal.error) {
+        return res.status(400).json({
+            message: imageVal.message
+        })
+    }
+
+    const result = await userService.createUser(req, res)
 
     return res.status(result.status).json(result)
 }
