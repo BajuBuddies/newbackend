@@ -8,7 +8,7 @@ const fileUpload = require('express-fileupload')
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/users');
 const productRouter = require('./routes/products.js')
-// const checkoutRouter = require('./routes/checkoutRoute.js')
+const checkoutRouter = require('./routes/checkout.js')
 // const authRouter = require('./routes/authRoute.js')
 
 
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', userRouter);
 app.use('/products', productRouter);
-// app.use('/checkout', checkoutRouter)
+app.use('/checkout', checkoutRouter)
 // app.use('/auth', authRouter)
 
 // catch 404 and forward to error handler
