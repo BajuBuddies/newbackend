@@ -1,4 +1,4 @@
-const checkoutService = require('../services/checkout')
+const checkoutService = require('../services/checkout.service')
 
 exports.checkoutProductController = async (req, res) => {
     const result = await checkoutService.createCheckoutProduct(req, res)
