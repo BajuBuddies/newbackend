@@ -7,7 +7,7 @@ const fileUpload = require('express-fileupload')
 
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/users');
-// const productRouter = require('./routes/productRoute.js')
+const productRouter = require('./routes/products.js')
 // const checkoutRouter = require('./routes/checkoutRoute.js')
 // const authRouter = require('./routes/authRoute.js')
 
@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/', indexRouter);
 app.use('/users', userRouter);
-// app.use('/products', productRouter);
+app.use('/products', productRouter);
 // app.use('/checkout', checkoutRouter)
 // app.use('/auth', authRouter)
 
