@@ -1,5 +1,6 @@
 const {user} = require('../models')   // Import user model
 const {saveImage} = require('../helpers/saveImage.helper') // Import saveImage helper
+const bcrypt = require('bcrypt')
 const { deleteImageHelper } = require("../helpers/deleteImage.helper")
 
 exports.getAllUsers = async (req, res) => {
@@ -35,6 +36,8 @@ exports.getDetailUser = async (req, res) => {
 exports.createUser = async (req, res) => {
     const { username, nama_lengkap, email, password, role } = req.body;
     const slug = username.toLowerCase().split(' ').join('-')
+    const EncryptPassword = await bcrypt.hash(password, 10)
+    password = EncryptPassword
 
     const imageFilePath = await saveImage(req.files.image,slug, "user")
     const data = await user.create({
